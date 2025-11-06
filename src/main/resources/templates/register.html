@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>SunLight PlayHouse</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+	
+	<!-- USER REGISTRATION PAGE -->
+
+	<div class="container-fluid base">
+		<div class="row base-row">
+			<div class="col-3 menu">
+			<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+			<h4>SunLight PlayHouse</h4>
+			</div>
+				<ul class="list">
+					<li><a th:href="@{/}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:classappend="${menu == 'register'} ? 'text-dark' : ' '" th:href="@{/register}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Register</a></li>
+					<li><a th:href="@{/loginForm}"><i class="fas fa-users"></i>&nbsp;&nbsp;Login</a></li>
+					<li><a th:href="@{/aboutus}"><i class="fas fa-address-card"></i>&nbsp;&nbsp;About us</a></li>
+					<li><a th:href="@{/contactus}"><i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp;Contact us</a></li>
+				</ul>
+			</div>
+			<div class="col-9 register-form">
+				<div class="login">
+					<form th:action="@{/save}" method="post">
+					<div class="login-head">
+						<h3>Register</h3>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputName">Name</label> <input type="text"
+								class="form-control" id="exampleInputName"
+								placeholder="Enter name" name="name">
+
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email address</label> <input
+								type="email" class="form-control" id="exampleInputEmail1"
+								name="email" placeholder="Enter email">
+
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password</label> <input
+								type="password" class="form-control" id="exampleInputPassword1"
+								placeholder="Password" name="password">
+						</div>
+
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+					<div class="login-register">
+						<p>
+							Already register ?<span><a th:href="@{/loginForm}">click here</a></span>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const form = document.querySelector("form");
+			const nameInput = document.querySelector("#exampleInputName");
+			const mailInput = document.querySelector("#exampleInputEmail1");
+			const passwordInput = document.querySelector("#exampleInputPassword1");
+			
+			form.addEventListener("submit", function(event) {
+				let isValid = true;
+				let messages = [];
+				
+				if(nameInput.value.trim() === "") {
+					isValid = false;
+					messages.push("Name is required.");
+				} else if(nameInput.value.trim().length < 3) {
+					isValid = false;
+					messages.push("Name must be at least 3 characters long.");
+				}
+				
+				const emailPattern =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				
+				if(mailInput.value.trim() === "") {
+					isValid = false;
+					messages.push("Email is required.");
+				} else if(!emailPattern.test(mailInput.value.trim())) {
+					isValid = false;
+					messages.push("Invalid Mail Format.");
+				}
+				
+				
+				if(passwordInput.value.trim() === "") {
+					isValid = false;
+					messages.push("Password is required.");
+				} else if(passwordInput.value.trim().length < 5) {
+					isValid = false;
+					messages.push("Password must be at least 5 characters long.");
+				}
+				
+				if(!isValid) {
+					event.preventDefault();
+					alert(messages.join("\n"));
+				}
+				
+			})
+		})
+	</script>
+</body>
+</html>

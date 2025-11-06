@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>About Us - SunLight PlayHouse</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+	<!-- About Us PAGE -->
+	<div class="container-fluid base">
+		<div class="row base-row">
+			
+			<!-- Side Menu / Logo -->
+			<div class="col-3 menu">
+				<div class="logo mb-5 text-center text-light bg-dark pt-2 pb-2">
+					<h4>SunLight PlayHouse</h4>
+				</div>
+				<ul class="list">
+					<li><a th:href="@{/}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/register}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Register</a></li>
+					<li><a th:classappend="${menu == 'login'} ? 'text-dark' : ' '" th:href="@{/loginForm}"><i class="fas fa-users"></i>&nbsp;&nbsp;Login</a></li>
+					<li><a th:href="@{/aboutus}"><i class="fas fa-address-card"></i>&nbsp;&nbsp;About us</a></li>
+					<li><a th:href="@{/contactus}"><i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp;Contact us</a></li>
+				</ul>
+			</div>
+
+			<!-- About Us Content -->
+			<div class="col-9 content p-5">
+				<div class="container-fluid bg-danger text-light text-center py-1 mb-1 shadow">
+					<h2 class="display-4 fw-bold">Contact Us</h2>
+				</div>
+				<br><br>
+				 
+				<div class="container">
+				        <div class="row">
+				            
+				            <!-- Info Section -->
+				            <div class="col-md-6 mb-4">
+				                <h3 class="text-primary mb-3"> Our Theatre Experience</h3>
+				                <p>
+				                    At <strong>SunLight PlayHouse</strong>, we strive to provide the best
+				                    cinematic experience — from plush seating and crystal-clear sound
+				                    to smooth online booking and warm hospitality.
+				                </p>
+				                <p>
+				                    If you ever face any issues with bookings, facilities, or service,
+				                    don’t hesitate to let us know. Your feedback helps us improve and
+				                    serve you better.
+				                </p>
+
+				                <h5 class="mt-4">📍 Our Location</h5>
+				                <p>SunLight PlayHouse,<br/>Thiruparankundram, Madurai, India</p>
+
+				                <h5>☎️ Contact Numbers</h5>
+				                <p>+91 98765 43210 | +91 91234 56789</p>
+
+				                <h5>📧 Email</h5>
+				                <p>support@sunlightplayhouse.com</p>
+				            </div>
+
+				            <!-- Contact Form -->
+				            <div class="col-md-6 mb-4">
+				                <h3 class="text-primary mb-3"> Send Us a Message</h3>
+				                <form th:action="@{/contact/submit}" method="post">
+				                    <div class="mb-3">
+				                        <label for="name" class="form-label">Your Name</label>
+				                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required />
+				                    </div>
+
+				                    <div class="mb-3">
+				                        <label for="email" class="form-label">Your Email</label>
+				                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required />
+				                    </div>
+
+				                    <div class="mb-3">
+				                        <label for="subject" class="form-label">Subject</label>
+				                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Booking issue, feedback, etc." required />
+				                    </div>
+
+				                    <div class="mb-3">
+				                        <label for="message" class="form-label">Message</label>
+				                        <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+				                    </div>
+
+				                    <button type="submit" class="btn btn-primary w-100">
+				                        Submit <i class="fas fa-paper-plane"></i>
+				                    </button>
+				                </form>
+				            </div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

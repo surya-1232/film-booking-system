@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>SunLight PlayHouse</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+	
+	<!-- CUSTOMER BOOKING PAGE-->
+
+	<div class="container-fluid base">
+		<div class="row base-row">
+			
+			<!-- Left Navigation Menu -->
+			<div class="col-3 menu">
+				<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+					<h4>SunLight PlayHouse</h4>
+				</div>
+				<ul class="list">
+					<li><a th:href="@{/home}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/setting}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Settings</a></li>
+					<li><a th:href="@{/order-history}"><i class="fas fa-history"></i>&nbsp;&nbsp;Orders</a></li>
+					<li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+				</ul>
+			</div>
+			
+			<!-- Right Dashboard -->
+			
+			<div class="col-9 dashboard">
+				<div class="dashboard-section">
+					
+					<!-- Header -->
+					<div class="dashboard-head">
+						<p>
+							<span><i class="fas fa-user"></i></span>&nbsp;
+							<span class="name-user" th:if="${session.user.name}" th:text="${session.user.name}"></span>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span><i class="fas fa-envelope"></i><sup><i class="fas fa-sms"></i></sup></span>
+						</p>
+					</div>
+					
+					<!-- Seat Booking Section -->
+					<div class="dashboard-seat">
+						<h2>Please schedule your date and time:</h2>
+						
+						<div class="date_form">
+							<form th:action="@{/check}" method="post" id="form">
+								<select name="localtime" id="timeselect">
+									<option th:value="${time}" th:text="${time}"></option>
+									<option value="09:00 am">09:00 am</option>
+									<option value="12:00 am">12:00 am</option>
+									<option value="03:00 pm">03:00 pm</option>
+									<option value="06:00 pm">06:00 pm</option>
+									<option value="09:00 pm">09:00 pm</option>
+								</select> 
+								<input type="date" name="localdate" th:value="${date}" th:min="${min}" th:max="${max}" id="dateselect" />
+							</form>
+						</div>
+						
+					<br/>
+					
+					<!-- Seat summary -->
+					<div class="jumbotron p-0 js-seat text-center">
+						<h4>Seat selected</h4>
+						<div class="dynamic-seat" id="seat-dynamic" style="word-break: break-all"></div>
+						<h4>Total</h4>
+						<label id="show-price">0</label><span> rs</span>
+					</div>
+					
+					<!-- Seat Selection -->
+				
+					<form th:action="@{/book-seat}" method="post">
+						<input type="hidden" name="movieName" th:value="${session.movieName}" />
+						
+						<div class="container seat-section">
+							<h2>Please select your seat</h2>
+							<div class="symbol">
+								<i class="fas fa-square one"></i>&nbsp;<span>Already Booked</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<i class="fas fa-square two"></i>&nbsp;<span>Seat Available</span>
+							</div>
+							
+							<div class="row seat-row">
+								<div class="col-12">
+									
+									<!-- Example loop for seats -->
+									<div th:each="i : ${#numbers.sequence(1,40)}" style="display:inline-block; margin:5px;">
+										<input type="checkbox" th:id="'seat' + ${i}" hidden
+											th:classappend="${#lists.contains(seats, 'seat' + i)} ? 'box1' : 'mybtn'"
+											th:checked="${#lists.contains(seats, 'seat' + i)}"
+											th:disabled="${#lists.contains(seats, 'seat' + i)}"
+											th:value="'seat' + ${i}" name="seatNo[]"/>
+										<label class="btn btn-success" th:for="'seat' + ${i}" th:text="${i}"></label>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<button type="submit" class="btn btn-primary btn1">Book seat</button>
+					</form>
+			</div>		
+		</div>
+	</div>
+</div>
+
+<script>
+
+	document.getElementById("dateselect").onchange = function() {
+		document.getElementById("form").submit();
+	}
+
+	document.getElementById("timeselect").onchange = function() {
+		document.getElementById("form").submit();
+	}
+	
+	
+	const mySeats = document.getElementById('seat-dynamic');
+	const myPrice = document.getElementById('show-price');
+	var total = 0;
+	var seat = [];
+	const checkBox = document.querySelectorAll('input[type="checkbox"]');
+	
+	for (var i = 0; i < checkBox.length; i++) {
+		checkBox[i].addEventListener('click', displayValue);
+	}
+	
+	function displayValue(e) {
+		var myValue = 125;
+		if (e.target.checked) {
+			seat.push(e.target.id);
+			total += myValue;
+
+		} else {
+			var index = seat.indexOf(e.target.id);
+			seat.splice(index, 1);
+			total -= myValue;
+		}
+	
+		mySeats.innerHTML = seat.join(", ");
+		myPrice.innerHTML = total;
+	}
+</script>
+</body>
+</html>

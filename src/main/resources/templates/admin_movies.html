@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SunLight PlayHouse</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/all.css}" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+
+<body>
+    <!-- Top Branding -->
+	<header class="bg-dark text-light p-3">
+        <h2 class="text-center text-2xl font-bold">SunLight PlayHouse - Admin Panel</h2>
+    </header>
+
+    <!-- Horizontal Navigation -->
+	<nav class="bg-secondary p-2 text-center">
+		<a th:href="@{/admin/home}" class="text-light mx-3 hover:underline">Dashboard</a>
+		<a th:href="@{/admin/movies}" class="text-light mx-3 hover:underline">Update Movies</a> 
+        <a th:href="@{/admin/customer-details}" class="text-light mx-3 hover:underline">Customer Details</a>
+		<a th:href="@{/admin/sales-report}" class="text-light mx-3 hover:underline">Sales Reports</a>
+        <a th:href="@{/logout}" class="text-light mx-3 hover:underline">Logout</a>
+    </nav>
+
+    <!-- Main Content -->
+	<main class="container mt-4">
+		
+		<!-- Page Title depends on mode -->
+		<h3 th:text="${movie != null} ? 'Update Movie' : 'Add New Movie'"></h3>
+		<p class="text-muted" th:text="${movie != null} ? 'Modify details below to update the movie.' : 'Fill in the details below to add a new movie.'"></p> 
+			
+		<!-- Form: Add or Update -->
+		<form th:action="${updateMode} ? @{'/admin/update-movie/' + ${movie.movieId}} : @{/admin/add-movie}" method="post" enctype="multipart/form-data" >
+
+			<input type="hidden" name="movieId" th:value="${movie != null} ? ${movie.movieId} : 0"/>
+			
+			<div class="mb-3"> 
+				<label class="form-label">Movie Name</label> 
+				<input type="text" name="movieName" class="form-control"
+				       th:value="${movie != null} ? ${movie.movieName} : ''" required>
+			</div> 
+			
+			<div class="mb-3"> 
+				<label class="form-label">Movie Poster</label> 
+				<input type="file" name="imageFile" class="form-control" accept="image/jpeg, image/png, image/gif"
+				       th:required="${movie == null}" required> 
+				<small class="text-muted">Upload poster image (jpg/png/gif). Existing file will remain if left empty.</small>
+			</div> 
+			
+			<div class="mb-3"> 
+				<label class="form-label">Movie Description</label> 
+				<textarea name="movieDetails" class="form-control" rows="3" placeholder="Write movie description here..." 
+				          th:text="${movie != null} ? ${movie.movieDetails} : ''" required></textarea> 
+			</div> 
+			
+			<!-- Button changes dynamically -->
+			<button type="submit" class="btn btn-primary" 
+			        th:text="${updateMode} ? 'Update Movie' : 'Save Movie'"></button> 
+		</form> 
+	</main>
+</body>
+</html>

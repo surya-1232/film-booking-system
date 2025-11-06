@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SunLight PlayHouse</title>
+    <link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+
+<body>
+    <!-- Top Branding -->
+	<header class="bg-dark text-light p-3">
+        <h2 class="text-center text-2xl font-bold">SunLight PlayHouse - Admin Panel</h2>
+    </header>
+
+
+    <!-- Horizontal Navigation -->
+	<nav class="bg-secondary p-2 text-center">
+        <a th:href="@{/admin/add-movie}" class="text-light mx-3 hover:underline">Add Movie</a>
+        <a th:href="@{/admin/customer-details}" class="text-light mx-3 hover:underline">Customer Details</a>
+		<a th:href="@{/admin/sales-report}" class="text-light mx-3 hover:underline"> Sales Reports</a>
+        <a th:href="@{/logout}" class="text-light mx-3 hover:underline">Logout</a>
+   </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <h3>Welcome, Admin!</h3>
+        <p class="text-muted">Select an option from the menu to manage the system.</p>
+
+        <div class="row mt-4">
+            <!-- Quick Actions Cards -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body">
+                        <i class="fas fa-plus-circle fa-2x mb-2 text-primary"></i>
+                        <h5 class="card-title">Add Movie</h5>
+                        <a th:href="@{/admin/add-movie}" class="btn btn-sm btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-2x mb-2 text-success"></i>
+                        <h5 class="card-title">Customer Details</h5>
+                        <a th:href="@{/admin/customer-details}" class="btn btn-sm btn-success">View</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line fa-2x mb-2 text-warning"></i>
+                        <h5 class="card-title">Sales Report</h5>
+                        <a th:href="@{/admin/sales-report}" class="btn btn-sm btn-warning">Check</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

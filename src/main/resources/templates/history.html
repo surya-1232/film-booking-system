@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>SunLight PlayHouse</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+	
+	
+	<!-- CUSTOMER ORDER HISTORY PAGE-->
+	
+	<div class="container-fluid base">
+		<div class="row base-row">
+			<div class="col-3 menu">
+			<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+			<h4>SunLight PlayHouse</h4>
+			</div>
+				<ul class="list">
+					<li><a th:href="@{/home}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/setting}"><i class="fas fa-cogs"></i>&nbsp;&nbsp;Settings</a></li>
+					<li><a th:classappend="${menu == 'order'} ? 'text-dark' : ' '" th:href="@{/order-history}"><i class="fas fa-history"></i>&nbsp;&nbsp;Orders</a></li>
+					<li><a th:href="@{/aboutus}"><i class="fas fa-address-card"></i>&nbsp;&nbsp;About us</a></li>
+					<li><a th:href="@{/contactus}"><i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp;Contact us</a></li>
+					<li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></li>
+				</ul>
+			</div>
+			<div class="col-9 history">
+				<div class="history-section">
+					<div class="history-head">
+						<p>
+							<span><i class="fas fa-user"></i></span>&nbsp;<span
+								class="name-user" th:if="${session.user.name}"
+								th:text="${session.user.name}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="fas fa-envelope"></i>
+								<sup><i class="fas fa-sms"></i></sup></span>
+						</p>
+					</div>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col" class="text-primary">Movie</th>
+								<th scope="col" class="text-primary">Seat(s)</th>
+								<th scope="col" class="text-primary">Price</th>
+								<th scope="col" class="text-primary">Total</th>
+								<th scope="col" class="text-primary">Booking Date</th>
+								<th scope="col" class="text-primary">Show Date</th>
+								<th scope="col" class="text-primary">Show Time</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <tr th:each="history: ${hList}">
+						        <td th:text="${history.movieName}"></td>
+
+						        <!-- join seat numbers into comma-separated string -->
+								<td th:text="${#strings.replace(history.seat, 'seat', '')}"></td>
+
+						        <!-- show only first price (if it's a list) -->
+						        <td th:text="${#lists.isEmpty(history.price) ? '' : history.price[0]}"></td>
+
+						        <!-- total stays same -->
+						        <td th:text="${history.total}"></td>
+
+						        <td th:text="${#dates.format(history.bookOnDate, 'dd-MM-yyyy')}"></td>
+								
+						        <td th:text="${#dates.format(history.showOnDate, 'dd-MM-yyyy')}"
+						            th:classappend="${(history.showOnDate eq #dates.createToday()) or (history.showOnDate.after(#dates.createNow())) ? 'active' : 'deactive'}"></td>
+						        <td th:text="${history.showTime}"
+						            th:classappend="${(history.showOnDate eq #dates.createToday()) or (history.showOnDate.after(#dates.createNow())) ? 'active' : 'deactive'}"></td>
+						    </tr>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <script th:inline="javascript">
+	let str = [[${list1}]];
+	let obj = JSON.parse(str);
+	console.log(obj.seat);
+	document.write(obj);
+	
+	</script> -->
+</body>
+</html>

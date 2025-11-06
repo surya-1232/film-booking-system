@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Sales Report</title>
+	<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" href="#" th:href="@{/css/all.css}">
+    <link rel="stylesheet" href="#" th:href="@{/css/index.css}">
+</head>
+<body>
+
+    <!-- Top Branding -->
+    <header class="bg-dark text-light p-3">
+        <h2 class="text-center text-2xl font-bold">SunLight PlayHouse - Admin Panel</h2>
+    </header>
+
+    <!-- Horizontal Navigation -->
+    <nav class="bg-secondary p-2 text-center">
+        <a th:href="@{/admin/home}" class="text-light mx-3 hover:underline">Dashboard</a>
+        <a th:href="@{/admin/add-movie}" class="text-light mx-3 hover:underline">Add Movie</a>
+        <a th:href="@{/admin/customer-details}" class="text-light mx-3 hover:underline">Customer Details</a>
+        <a th:href="@{/logout}" class="text-light mx-3 hover:underline">Logout</a>
+    </nav>
+
+    <main class="container mt-6">
+        <h2>Sales Report</h2>
+
+		<table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Movie ID</th>
+                    <th>Movie Name</th>
+                    <th>Date Range</th>
+                    <th>Tickets Sold</th>
+                    <th>Average Ticket Price</th>
+                    <th>Total Sales</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows -->
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.id}"></td>
+                    <td th:text="${movie.name}"></td>
+                    <td th:text="${movie.startDate} + ' to ' + ${movie.endDate}"></td>
+                    <td th:text="${movie.ticketsSold}"></td>
+                    <td th:text="${movie.avgTicketPrice}"></td>
+                    <td th:text="${movie.totalSales}"></td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span th:classappend="${movie.status == 'Showing'} ? 'bg-green-100 text-green-800' :
+                                             ${movie.status == 'Upcoming'} ? 'bg-blue-100 text-blue-800' :
+                                             'bg-gray-100 text-gray-800'"
+                              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                              th:text="${movie.status}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

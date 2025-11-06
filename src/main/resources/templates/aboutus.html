@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>About Us - SunLight PlayHouse</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+	<!-- About Us PAGE -->
+	<div class="container-fluid base">
+		<div class="row base-row">
+			
+			<!-- Side Menu / Logo -->
+			<div class="col-3 menu">
+				<div class="logo mb-5 text-center text-light bg-dark pt-2 pb-2">
+					<h4>SunLight PlayHouse</h4>
+				</div>
+				<ul class="list">
+					<li><a th:href="@{/}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/register}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Register</a></li>
+					<li><a th:classappend="${menu == 'login'} ? 'text-dark' : ' '" th:href="@{/loginForm}"><i class="fas fa-users"></i>&nbsp;&nbsp;Login</a></li>
+					<li><a th:href="@{/aboutus}"><i class="fas fa-address-card"></i>&nbsp;&nbsp;About us</a></li>
+					<li><a th:href="@{/contactus}"><i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp;Contact us</a></li>
+				</ul>
+			</div>
+
+			<!-- About Us Content -->
+			<div class="col-9 content p-5">
+				<div class="container-fluid bg-danger text-light text-center py-1 mb-1 shadow">
+					<h2 class="display-4 fw-bold">About Us</h2>
+				</div>
+				<br><br>
+				 
+				<p>
+					Welcome to <strong>SunLight PlayHouse</strong>, your destination for
+					world-class movie experiences. We combine the magic of cinema with
+					the comfort of modern theaters, offering you unforgettable moments
+					with family and friends.
+				</p>
+
+				<h4 class="mt-4">Our Mission</h4>
+				<p>
+					To deliver high-quality entertainment, top-notch facilities, and
+					superior customer service that bring joy and connection to every
+					visitor.
+				</p>
+
+				<h4 class="mt-4"> Our Vision</h4>
+				<p>
+					To become the leading entertainment hub where stories come alive and
+					communities connect through the love of cinema.
+				</p>
+
+				<h4 class="mt-4"> Our Journey</h4>
+				<p>
+					Founded in <em>2020</em>, SunLight PlayHouse has grown from a single
+					screen to a multi-experience playhouse, hosting blockbuster movies,
+					local productions, and special screenings that bring culture and
+					entertainment together.
+				</p>
+
+				<h4 class="mt-4"> Why Choose Us?</h4>
+				<ul>
+					<li>Comfortable seating and world-class sound systems</li>
+					<li>Affordable ticket pricing and special offers</li>
+					<li>Friendly staff and customer-first service</li>
+					<li>Online booking for quick & hassle-free experience</li>
+				</ul>
+
+				<!-- Team Section (Optional) -->
+				<div class="mt-5">
+					<h4> Meet Our Team</h4>
+					<div class="row mt-3">
+						<div class="col-md-4 text-center">
+							<!-- <img src="#" class="img-fluid rounded-circle mb-2" alt="CEO" style="width:150px;"> -->
+							<h6>Surya</h6>
+							<p>Founder & CEO</p>
+						</div>
+						<div class="col-md-4 text-center">
+							<!--<img src="#" class="img-fluid rounded-circle mb-2" alt="Manager" style="width:150px;">  -->
+							<h6>Sharan</h6>
+							<p>Operations Manager</p>
+						</div>
+						<div class="col-md-4 text-center">
+						<!--<img src="#" class="img-fluid rounded-circle mb-2" alt="Support" style="width:150px;"> -->
+							<h6>Bala</h6>
+							<p>Customer Support</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

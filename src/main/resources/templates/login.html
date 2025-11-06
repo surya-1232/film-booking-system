@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>SunLight PlayHouse</title>
+<link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+<link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+</head>
+<body>
+	
+	<!-- USER LOGIN PAGE -->
+
+	<div class="container-fluid base">
+		<div class="row base-row">
+			<div class="col-3 menu">
+			<div class="logo mb-5 text-center text-light bg-dark pt-1 pb-1">
+			<h4>SunLight PlayHouse</h4>
+			</div>
+				<ul class="list">
+					<li><a th:href="@{/}"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a></li>
+					<li><a th:href="@{/register}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Register</a></li>
+					<li><a th:classappend="${menu == 'login'} ? 'text-dark' : ' '" th:href="@{/loginForm}"><i class="fas fa-users"></i>&nbsp;&nbsp;Login</a></li>
+					<li><a th:href="@{/aboutus}"><i class="fas fa-address-card"></i>&nbsp;&nbsp;About us</a></li>
+					<li><a th:href="@{/contactus}"><i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp;Contact us</a></li>
+				</ul>
+			</div>
+			<div class="col-9 login-form">
+				<div class="login">
+					<form th:action="@{/processing}" method="post">
+						<div>
+							<span th:text="${failed}"></span>
+						</div>
+						<div class="login-head">
+						<h3>Login</h3>
+						</div>
+						<div class="form-group">
+							<input type="hidden" name="redirect" th:value="${redirectUrl}">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email address</label> <input
+								type="email" class="form-control" id="exampleInputEmail1"
+								aria-describedby="emailHelp" placeholder="Enter email"
+								name="email">
+
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password</label> <input
+								type="password" class="form-control" id="exampleInputPassword1"
+								placeholder="Password" name="password">
+						</div>
+						<div class="forget">
+					<small><span><a href="#">Forget password</a></span></small>
+					<br>
+					
+					</div>
+						<button type="submit" class="btn btn-primary btn2">Login</button>
+					</form>
+					
+					<div class="login-register">
+					<p>New user ? <span><a th:href="@{/register}">click here</a></span></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script th:if="${alertMessage != null}">
+	    alert('[[${alertMessage}]]');
+	</script>
+	
+	<script>
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			const form = document.querySelector("form");
+			const mailInput = document.querySelector("#exampleInputEmail1");
+			const passwordInput = document.querySelector("#exampleInputPassword1");
+			
+			document.addEventListener("submit", function(event) {
+				
+				let isValid = true;
+				let messages = [];
+				
+				const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				
+				if(mailInput.value.trim() === "") {
+					isValid = false;
+					messages.push("Email is required.");
+				} else if(!emailPattern.test(mailInput.value.trim())) {
+					isValid = false;
+					messages.push("InValid Email Format.");
+				}
+				
+				if(passwordInput.value.trim() === "") {
+					isValid = false;
+					messages.push("Password is required.");
+				} else if(passwordInput.value.trim().length < 5) {
+					isValid = false;
+					messages.push("Password must be at least 5 characters long.");
+				}
+				
+				
+				if(!isValid) {
+					event.preventDefault();
+					alert(messages.join("\n"));
+				}
+			})
+		})
+	</script>
+</body>
+</html>
