@@ -1,7 +1,7 @@
 # Film Booking Project
 STEPS TO RUN THIS PROJECT:
 
-1. clone the project using `git clone <surya-1232/film-booking-system>`
+1. clone the project using `git clone <https://github.com/surya-1232/film-booking-system>`
 2. Open the project in your IDE (Eclipse / STS / IntelliJ)
 3. Configure the database connection in src/main/resources/application.properties file
 4. Navigate to com.bus.experiment
